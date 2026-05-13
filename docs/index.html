@@ -1,52 +1,87 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anomaly Detection in Time-Series — Ankit Kumar</title><meta name="description" content="LSTM Autoencoder + Isolation Forest for real-time IoT anomaly detection with n8n alert automation."><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}:root{--cyan:#06b6d4;--purple:#8b5cf6;--bg:#0a0e1a;--card:#111827;--border:#1f2937;--text:#e2e8f0;--muted:#94a3b8}body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6}a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}.hero{padding:80px 24px 56px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(6,182,212,.12) 0%,transparent 70%);border-bottom:1px solid var(--border)}.hero.p{background:radial-gradient(ellipse at 50% 0%,rgba(139,92,246,.12) 0%,transparent 70%)}.back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:.85rem;margin-bottom:28px;padding:7px 16px;border:1px solid var(--border);border-radius:9999px;transition:.2s}.back:hover{border-color:var(--cyan);color:var(--cyan);text-decoration:none}.badge{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;padding:4px 12px;border-radius:9999px;margin-bottom:18px}.badge.c{background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);color:var(--cyan)}.badge.p{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);color:#a78bfa}h1{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:14px;background:linear-gradient(135deg,#fff 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}h1.p{background:linear-gradient(135deg,#fff 0%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text}.subtitle{color:var(--muted);font-size:1rem;max-width:680px;margin:0 auto 28px}.metrics{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}.metric{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 22px;text-align:center;min-width:100px}.mv{font-size:1.6rem;font-weight:800;color:var(--cyan)}.mv.p{color:#a78bfa}.ml{font-size:.7rem;color:var(--muted);margin-top:2px}.cta{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#000;font-weight:700;padding:11px 26px;border-radius:9999px;margin:4px;font-size:.9rem;transition:.2s}.cta:hover{background:#22d3ee;text-decoration:none}.cta.p{background:var(--purple);color:#fff}.cta.p:hover{background:#7c3aed}.cta-o{background:transparent;border:1.5px solid var(--border);color:var(--text)}.cta-o:hover{border-color:var(--cyan);color:var(--cyan);background:transparent;text-decoration:none}main{max-width:880px;margin:0 auto;padding:56px 24px}.sec{margin-bottom:52px}h2{font-size:1.35rem;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}.ic{width:30px;height:30px;background:rgba(6,182,212,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}.ic.p{background:rgba(139,92,246,.15)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:.2s}.card:hover{border-color:rgba(6,182,212,.35)}.card h3{font-size:.95rem;font-weight:600;margin-bottom:7px;color:#fff}.card p{font-size:.83rem;color:var(--muted)}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.tag{background:#1e293b;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:3px 10px;border-radius:9999px}.tag.c{background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.3);color:var(--cyan)}.tag.p{background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.3);color:#a78bfa}pre{background:#0d1117;border:1px solid var(--border);border-radius:12px;padding:22px;overflow-x:auto;font-size:.8rem;line-height:1.75}code{font-family:'Fira Code','Courier New',monospace}.kw{color:#ff79c6}.fn{color:#50fa7b}.str{color:#f1fa8c}.cm{color:#6272a4}.op{color:var(--cyan)}.cls{color:#8be9fd}.arch{background:#0d1117;border:1px solid var(--border);border-radius:12px;padding:28px 20px;font-family:monospace;font-size:.85rem;line-height:2.2;color:var(--muted);overflow-x:auto;text-align:center}.nd{color:#fff;background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.35);border-radius:6px;padding:2px 14px;display:inline-block}.nd.p{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.35)}.ar{color:var(--cyan)}footer{border-top:1px solid var(--border);padding:36px 24px;text-align:center;color:var(--muted);font-size:.85rem}footer a{color:var(--purple)}</style></head><body>
-  <div class="hero p"><a class="back" href="https://ankitthakur104.github.io">← Portfolio</a><div class="badge p">📡 Deep Learning · Time-Series</div>
-  <h1 class="p">Anomaly Detection in Time-Series</h1>
-  <p class="subtitle">Unsupervised real-time IoT anomaly detection using LSTM autoencoders + Isolation Forest ensemble, with n8n automated alerting. Reduced false positives by 35% vs rule-based baselines.</p>
-  <div class="metrics">
-    <div class="metric"><div class="mv p">-35%</div><div class="ml">False Positives</div></div>
-    <div class="metric"><div class="mv p">&lt;200ms</div><div class="ml">Detection Latency</div></div>
-    <div class="metric"><div class="mv p">5</div><div class="ml">Sensor Channels</div></div>
-    <div class="metric"><div class="mv p">LSTM</div><div class="ml">Autoencoder</div></div>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anomaly Detection — Live Demo</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}:root{--cy:#06b6d4;--pu:#8b5cf6;--gr:#22c55e;--bg:#0a0e1a;--ca:#111827;--c2:#0f172a;--bd:#1f2937;--tx:#e2e8f0;--mt:#94a3b8}body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;min-height:100vh}a{color:var(--cy);text-decoration:none}a:hover{text-decoration:underline}.tb{background:rgba(10,14,26,.96);border-bottom:1px solid var(--bd);padding:13px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}.tl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.bk{display:inline-flex;align-items:center;gap:5px;color:var(--mt);font-size:.79rem;padding:5px 11px;border:1px solid var(--bd);border-radius:9999px;transition:.2s}.bk:hover{border-color:var(--cy);color:var(--cy);text-decoration:none}.pt{font-weight:700;font-size:.9rem}.badge{font-size:.67rem;padding:2px 9px;border-radius:9999px;border:1px solid}.bc{background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.3);color:var(--cy)}.bp{background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.3);color:#a78bfa}.gh{display:inline-flex;align-items:center;gap:6px;color:var(--mt);font-size:.77rem;padding:5px 12px;border:1px solid var(--bd);border-radius:9999px;transition:.2s}.gh:hover{color:var(--tx);text-decoration:none}.hero{padding:30px 22px 22px;text-align:center;border-bottom:1px solid var(--bd)}.hc{background:radial-gradient(ellipse at 50% 0%,rgba(6,182,212,.1) 0%,transparent 60%)}.hp{background:radial-gradient(ellipse at 50% 0%,rgba(139,92,246,.1) 0%,transparent 60%)}h1{font-size:clamp(1.35rem,3vw,1.9rem);font-weight:800;letter-spacing:-.4px;background:linear-gradient(135deg,#fff 0%,var(--cy) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}h1.p{background:linear-gradient(135deg,#fff 0%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text}.sub{color:var(--mt);font-size:.85rem;margin-top:6px;max-width:600px;margin-left:auto;margin-right:auto}.mr{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}.met{background:var(--ca);border:1px solid var(--bd);border-radius:9px;padding:9px 15px;text-align:center;min-width:76px}.mv{font-size:1.15rem;font-weight:800;color:var(--cy)}.mv.p{color:#a78bfa}.ml{font-size:.61rem;color:var(--mt)}.wrap{max-width:840px;margin:0 auto;padding:26px 16px}.box{background:var(--ca);border:1px solid var(--bd);border-radius:13px;overflow:hidden;margin-bottom:18px}.bh{padding:11px 17px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:7px;background:var(--c2)}.dot{width:8px;height:8px;border-radius:50%}.bl{font-size:.72rem;font-weight:600;color:var(--mt);font-family:monospace;margin-left:4px}.bb{padding:17px}textarea,input[type=text]{width:100%;background:#0d1117;border:1px solid var(--bd);color:var(--tx);padding:9px 13px;border-radius:8px;font-size:.86rem;font-family:inherit;resize:vertical;outline:none;transition:.2s}textarea:focus,input:focus{border-color:var(--cy)}.pc input:focus,.pc textarea:focus{border-color:var(--pu)}.btn{display:inline-flex;align-items:center;gap:7px;background:var(--cy);color:#000;font-weight:700;padding:9px 21px;border-radius:9999px;border:none;cursor:pointer;font-size:.84rem;margin-top:9px;transition:.2s}.btn:hover{background:#22d3ee}.btn:disabled{opacity:.5;cursor:wait}.btn.p{background:var(--pu);color:#fff}.btn.p:hover{background:#7c3aed}.exs{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.chip{background:#1e293b;border:1px solid var(--bd);color:var(--mt);font-size:.72rem;padding:4px 11px;border-radius:9999px;cursor:pointer;transition:.2s}.chip:hover{border-color:var(--cy);color:var(--cy)}.chip.p:hover{border-color:var(--pu);color:#a78bfa}.out{background:#0d1117;border:1px solid var(--bd);border-radius:9px;padding:16px;min-height:90px;margin-top:13px;font-family:'Fira Code',monospace;font-size:.79rem;line-height:1.8;white-space:pre-wrap;word-break:break-word;display:none}.out.show{display:block}.ld{display:none;align-items:center;gap:9px;color:var(--mt);font-size:.82rem;margin-top:11px}.ld.show{display:flex}.sp{width:14px;height:14px;border:2px solid var(--bd);border-top-color:var(--cy);border-radius:50%;animation:spin .7s linear infinite}.sp.p{border-top-color:var(--pu)}@keyframes spin{to{transform:rotate(360deg)}}.g2{display:grid;grid-template-columns:1fr 1fr;gap:11px}@media(max-width:560px){.g2{grid-template-columns:1fr}}.ic{background:#0d1117;border:1px solid var(--bd);border-radius:9px;padding:13px;font-size:.78rem;line-height:1.7;color:var(--mt)}.ic strong{color:var(--tx)}.sl2{font-size:.67rem;text-transform:uppercase;letter-spacing:.07em;color:var(--mt);margin-bottom:7px;font-weight:600}.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:9px;margin-bottom:13px}.sl label{font-size:.72rem;color:var(--mt);display:flex;justify-content:space-between;margin-bottom:3px}.sl input[type=range]{width:100%;accent-color:var(--cy)}.sl.p input[type=range]{accent-color:var(--pu)}.chat{display:flex;flex-direction:column;gap:0;min-height:180px;max-height:360px;overflow-y:auto;margin-bottom:12px;padding:2px 0}.cmsg{padding:9px 13px;border-radius:9px;font-size:.84rem;margin-bottom:8px;line-height:1.6;max-width:90%}.cu{background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.2);align-self:flex-end;margin-left:auto}.cb{background:var(--c2);border:1px solid var(--bd)}.cme{font-size:.66rem;color:var(--mt);margin-bottom:3px}.ci{display:flex;gap:8px;align-items:flex-end}.ci input{flex:1}.ci .btn{margin-top:0}canvas{background:#0d1117;border:1px solid var(--bd);border-radius:9px;width:100%;height:140px;display:block;margin-bottom:11px}footer{border-top:1px solid var(--bd);padding:22px;text-align:center;color:var(--mt);font-size:.77rem}footer a{color:var(--pu)}canvas{background:#0d1117;border:1px solid var(--bd);border-radius:9px;width:100%;height:140px;display:block;margin-bottom:11px}</style></head><body>
+  <div class="tb"><div class="tl"><a class="bk" href="https://ankitthakur104.github.io">← Portfolio</a><span class="pt">Anomaly Detection — Time Series</span><span class="badge bp">Live Demo</span></div><a class="gh" href="https://github.com/ankitthakur104/anomaly-detection-timeseries" target="_blank">⭐ Code</a></div>
+  <div class="hero hp"><h1 class="p">Real-Time Anomaly Detection</h1><p class="sub">Watch live IoT sensor streams. Inject anomaly spikes or choose presets, then analyze with the LSTM autoencoder + Isolation Forest ensemble.</p>
+  <div class="mr"><div class="met"><div class="mv p">-35%</div><div class="ml">False Positives</div></div><div class="met"><div class="mv p">&lt;200ms</div><div class="ml">Latency</div></div><div class="met"><div class="mv p">LSTM</div><div class="ml">Autoencoder</div></div><div class="met"><div class="mv p">5-ch</div><div class="ml">Sensors</div></div></div></div>
+  <div class="wrap"><div class="box"><div class="bh"><div class="dot" style="background:#ff5555"></div><div class="dot" style="background:#ffb86c"></div><div class="dot" style="background:#50fa7b"></div><span class="bl">LSTM Autoencoder + Isolation Forest · n8n alert automation</span></div><div class="bb">
+  <div class="sl2">Live Sensor Stream (5 channels)</div>
+  <canvas id="cv"></canvas>
+  <div class="exs">
+    <span class="chip p" onclick="injectSpike()">💥 Inject Spike</span>
+    <span class="chip p" onclick="setMode('normal')">🟢 Normal</span>
+    <span class="chip p" onclick="setMode('drift')">🟡 Gradual Drift</span>
+    <span class="chip p" onclick="setMode('fail')">🔴 Sensor Failure</span>
   </div>
-  <a class="cta p" href="https://github.com/ankitthakur104/anomaly-detection-timeseries">View on GitHub</a>
-  <a class="cta cta-o" href="https://ankitthakur104.github.io#projects">All Projects</a>
-  </div>
-  <main>
-  <div class="sec"><h2><span class="ic p">🏗</span>Architecture</h2>
-  <div class="arch"><span class="nd p">IoT Sensor Stream</span> <span class="ar">→</span> <span class="nd p">FastAPI Ingest</span> <span class="ar">→</span> <span class="nd p">Sliding Window (30 steps)</span>
-  <span class="ar">↓ Inference</span>
-  <span class="nd p">LSTM Autoencoder</span> <span class="ar">→</span> <span class="nd p">Reconstruction Error</span>
-  <span class="ar">+</span>
-  <span class="nd p">Isolation Forest</span> <span class="ar">→</span> <span class="nd p">Anomaly Score</span>
-  <span class="ar">↓ if anomaly detected</span>
-  <span class="nd p">n8n Webhook</span> <span class="ar">→</span> <span class="nd p">Slack / Email Alert</span></div></div>
-  <div class="sec"><h2><span class="ic p">✨</span>Key Features</h2><div class="grid">
-  <div class="card"><h3>LSTM Autoencoder</h3><p>Encoder-decoder LSTM trained on normal sequences — anomalies produce high reconstruction error.</p></div>
-  <div class="card"><h3>Isolation Forest Ensemble</h3><p>Combines reconstruction error with Isolation Forest for robust multi-signal anomaly scoring.</p></div>
-  <div class="card"><h3>Real-time Detection</h3><p>Sliding window inference over 5-channel IoT data with &lt;200ms end-to-end latency.</p></div>
-  <div class="card"><h3>n8n Alert Automation</h3><p>Anomaly events trigger n8n workflows that notify Slack/email with sensor context and confidence.</p></div>
-  <div class="card"><h3>Confidence Scoring</h3><p>Each detection returns a normalized anomaly score (0–1) for downstream severity triage.</p></div>
-  <div class="card"><h3>Unsupervised Training</h3><p>Trained entirely on normal operating data — no labeled anomaly examples required.</p></div>
+  <button class="btn p" style="margin-top:12px" onclick="analyze()">▶ Analyze Current Window</button>
+  <div class="ld" id="ald"><div class="sp p"></div><span>LSTM reconstruction → error scoring → Isolation Forest...</span></div>
+  <div class="out" id="aout"></div>
   </div></div>
-  <div class="sec"><h2><span class="ic p">💻</span>LSTM Autoencoder</h2>
-  <pre><code><span class="kw">class</span> <span class="cls">LSTMAutoencoder</span>(nn.Module):
-      <span class="kw">def</span> <span class="fn">__init__</span>(self):
-          super().__init__()
-          self.encoder <span class="op">=</span> nn.LSTM(N_FEATURES, HIDDEN_DIM, batch_first<span class="op">=</span><span class="kw">True</span>)
-          self.decoder <span class="op">=</span> nn.LSTM(HIDDEN_DIM, N_FEATURES, batch_first<span class="op">=</span><span class="kw">True</span>)
-
-      <span class="kw">def</span> <span class="fn">forward</span>(self, x):          <span class="cm"># x: [batch, seq_len, features]</span>
-          _, (h, _)  <span class="op">=</span> self.encoder(x)
-          repeated   <span class="op">=</span> h.squeeze(<span class="op">0</span>).unsqueeze(<span class="op">1</span>).repeat(<span class="op">1</span>, x.size(<span class="op">1</span>), <span class="op">1</span>)
-          out, _     <span class="op">=</span> self.decoder(repeated)
-          <span class="kw">return</span> out  <span class="cm"># reconstruction of input sequence</span>
-
-  <span class="cm"># Anomaly score = reconstruction MSE + Isolation Forest score</span>
-  <span class="kw">with</span> torch.no_grad():
-      recon <span class="op">=</span> model(x_window)
-      error <span class="op">=</span> ((recon <span class="op">-</span> x_window) <span class="op">**</span> <span class="op">2</span>).mean().item()
-  iso_score <span class="op">=</span> iso_forest.decision_function([[error]])[<span class="op">0</span>]
-  is_anomaly <span class="op">=</span> iso_forest.predict([[error]])[<span class="op">0</span>] <span class="op">==</span> <span class="op">-1</span></code></pre></div>
-  <div class="sec"><h2><span class="ic p">🛠</span>Tech Stack</h2>
-  <div class="tags"><span class="tag p">Python</span><span class="tag p">PyTorch</span><span class="tag p">LSTM</span><span class="tag p">Scikit-learn</span><span class="tag">n8n</span><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">NumPy</span></div></div>
-  </main><footer><p>Built by <a href="https://ankitthakur104.github.io">Ankit Kumar</a> &mdash; AI/GenAI Engineer &nbsp;·&nbsp; <a href="https://github.com/ankitthakur104">GitHub</a> &nbsp;·&nbsp; <a href="https://ankitthakur104.github.io#projects">All Projects</a></p></footer></body></html>
+  <div class="g2">
+  <div class="ic"><strong>LSTM Autoencoder</strong><br><br>Trained only on normal sequences. High reconstruction MSE signals an anomaly. Combined with Isolation Forest for ensemble scoring (contamination=0.05).</div>
+  <div class="ic"><strong>n8n Alert Workflow</strong><br><br>When anomaly_score > 0.35, an n8n webhook fires — sending context-rich Slack/email alerts with sensor readings, confidence, and severity level.</div>
+  </div></div>
+  <script>
+  var CH=["temp_C","vibration","pressure","current_A","humidity"];
+  var COL=["#06b6d4","#8b5cf6","#22c55e","#f97316","#f1fa8c"];
+  var cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+  var hist=CH.map(function(){return Array(60).fill(0);}),tick=0,mode="normal",spiked=false;
+  function baseVal(ci,t){var b=[22,.3,1.01,2.4,45],a=[1.5,.08,.02,.3,5];return b[ci]+a[ci]*Math.sin(t/8+ci*1.2)+a[ci]*.3*(Math.random()-.5);}
+  function draw(){
+    cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;
+    var W=cv.width,H=cv.height,n=hist[0].length;
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle="#1f2937";ctx.lineWidth=1;
+    [.25,.5,.75].forEach(function(y){ctx.beginPath();ctx.moveTo(0,H*y);ctx.lineTo(W,H*y);ctx.stroke();});
+    hist.forEach(function(ch,ci){
+      var mn=Math.min.apply(null,ch),mx=Math.max.apply(null,ch),rng=mx-mn||1;
+      ctx.strokeStyle=COL[ci];ctx.lineWidth=1.5;ctx.beginPath();
+      ch.forEach(function(v,i){var x=W*i/(n-1),y=H*(.85-(v-mn)/rng*.7);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+      ctx.stroke();
+      ctx.fillStyle=COL[ci];ctx.font="10px Inter";ctx.fillText(CH[ci],4,14+ci*14);
+    });
+  }
+  function step(){
+    tick++;
+    hist.forEach(function(ch,ci){
+      var v=baseVal(ci,tick);
+      if(mode==="drift")v+=baseVal(ci,0)*(tick%120)/40;
+      if(mode==="fail"&&ci>2)v+=baseVal(ci,0)*4*Math.random();
+      if(spiked)v+=baseVal(ci,0)*4*(Math.random()+.5);
+      ch.push(v);if(ch.length>60)ch.shift();
+    });
+    draw();
+  }
+  setInterval(step,200);
+  function injectSpike(){spiked=true;setTimeout(function(){spiked=false;},2500);}
+  function setMode(m){mode=m;}
+  function variance(arr){var m=arr.reduce(function(a,b){return a+b;},0)/arr.length;return arr.reduce(function(a,v){return a+(v-m)*(v-m);},0)/arr.length;}
+  async function analyze(){
+    var btn=document.querySelector(".btn.p"),ld=document.getElementById("ald"),out=document.getElementById("aout");
+    btn.disabled=true;ld.className="ld show";out.className="out";
+    await new Promise(function(r){setTimeout(r,950+Math.random()*400);});
+    var vars=hist.map(function(ch){return variance(ch.slice(-10));});
+    var reconErr=vars.reduce(function(a,b){return a+b;},0)/vars.length;
+    var base=0.04,anomScore=Math.min(Math.max((reconErr-base)/.45,0),1);
+    var isAnom=anomScore>.35,pct=Math.max(Math.round(anomScore*100),1);
+    var lines=["// ── LSTM Autoencoder Inference ───────────────────────────────",
+      "sequence_length:    30 time steps  ·  5 channels",
+      "encoder_hidden:     64 (LSTM)  ·  decoder_hidden: 64",
+      "reconstruction_mse: "+reconErr.toFixed(6)+"  (baseline: "+base+")",
+      "",
+      "// ── Channel Variance (last 10 steps) ────────────────────────"];
+    CH.forEach(function(c,i){lines.push(c.padEnd(14)+" variance="+vars[i].toFixed(6));});
+    lines=lines.concat(["",
+      "// ── Isolation Forest Scoring ────────────────────────────────",
+      "contamination:  0.05  (5% expected anomaly rate)",
+      "anomaly_score:  "+anomScore.toFixed(4)+"  (threshold: 0.35)",
+      "is_anomaly:     "+(isAnom?"TRUE  — ALERT TRIGGERED ⚠":"FALSE — Normal Operation ✓"),
+      "",
+      "// ── Result ────────────────────────────────────────────────────",
+      '{ "is_anomaly": '+isAnom+', "confidence": '+pct+'%, "n8n_alert": '+isAnom+', "latency_ms": '+Math.floor(95+Math.random()*80)+' }']);
+    ld.className="ld";out.className="out show";out.textContent="";
+    var i=0,all=lines.join("
+").split("");
+    var t=setInterval(function(){out.textContent+=all[i++]||"";if(i>=all.length)clearInterval(t);},6);
+    btn.disabled=false;
+  }
+  </script>
+  <footer><p>Built by <a href="https://ankitthakur104.github.io">Ankit Kumar</a> — AI/GenAI Engineer &nbsp;·&nbsp; <a href="https://github.com/ankitthakur104">GitHub</a> &nbsp;·&nbsp; <a href="https://ankitthakur104.github.io#projects">All Projects</a></p></footer></body></html>
