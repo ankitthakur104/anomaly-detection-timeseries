@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anomaly Detection in Time-Series — Ankit Kumar</title><meta name="description" content="LSTM Autoencoder + Isolation Forest for real-time IoT anomaly detection with n8n alert automation."><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}:root{--cyan:#06b6d4;--purple:#8b5cf6;--bg:#0a0e1a;--card:#111827;--border:#1f2937;--text:#e2e8f0;--muted:#94a3b8}body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6}a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}.hero{padding:80px 24px 56px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(6,182,212,.12) 0%,transparent 70%);border-bottom:1px solid var(--border)}.hero.p{background:radial-gradient(ellipse at 50% 0%,rgba(139,92,246,.12) 0%,transparent 70%)}.back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:.85rem;margin-bottom:28px;padding:7px 16px;border:1px solid var(--border);border-radius:9999px;transition:.2s}.back:hover{border-color:var(--cyan);color:var(--cyan);text-decoration:none}.badge{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;padding:4px 12px;border-radius:9999px;margin-bottom:18px}.badge.c{background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);color:var(--cyan)}.badge.p{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);color:#a78bfa}h1{font-size:clamp(1.8rem,4.5vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:14px;background:linear-gradient(135deg,#fff 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}h1.p{background:linear-gradient(135deg,#fff 0%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text}.subtitle{color:var(--muted);font-size:1rem;max-width:680px;margin:0 auto 28px}.metrics{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}.metric{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 22px;text-align:center;min-width:100px}.mv{font-size:1.6rem;font-weight:800;color:var(--cyan)}.mv.p{color:#a78bfa}.ml{font-size:.7rem;color:var(--muted);margin-top:2px}.cta{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#000;font-weight:700;padding:11px 26px;border-radius:9999px;margin:4px;font-size:.9rem;transition:.2s}.cta:hover{background:#22d3ee;text-decoration:none}.cta.p{background:var(--purple);color:#fff}.cta.p:hover{background:#7c3aed}.cta-o{background:transparent;border:1.5px solid var(--border);color:var(--text)}.cta-o:hover{border-color:var(--cyan);color:var(--cyan);background:transparent;text-decoration:none}main{max-width:880px;margin:0 auto;padding:56px 24px}.sec{margin-bottom:52px}h2{font-size:1.35rem;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px}.ic{width:30px;height:30px;background:rgba(6,182,212,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}.ic.p{background:rgba(139,92,246,.15)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:.2s}.card:hover{border-color:rgba(6,182,212,.35)}.card h3{font-size:.95rem;font-weight:600;margin-bottom:7px;color:#fff}.card p{font-size:.83rem;color:var(--muted)}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.tag{background:#1e293b;border:1px solid var(--border);color:var(--muted);font-size:.72rem;padding:3px 10px;border-radius:9999px}.tag.c{background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.3);color:var(--cyan)}.tag.p{background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.3);color:#a78bfa}pre{background:#0d1117;border:1px solid var(--border);border-radius:12px;padding:22px;overflow-x:auto;font-size:.8rem;line-height:1.75}code{font-family:'Fira Code','Courier New',monospace}.kw{color:#ff79c6}.fn{color:#50fa7b}.str{color:#f1fa8c}.cm{color:#6272a4}.op{color:var(--cyan)}.cls{color:#8be9fd}.arch{background:#0d1117;border:1px solid var(--border);border-radius:12px;padding:28px 20px;font-family:monospace;font-size:.85rem;line-height:2.2;color:var(--muted);overflow-x:auto;text-align:center}.nd{color:#fff;background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.35);border-radius:6px;padding:2px 14px;display:inline-block}.nd.p{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.35)}.ar{color:var(--cyan)}footer{border-top:1px solid var(--border);padding:36px 24px;text-align:center;color:var(--muted);font-size:.85rem}footer a{color:var(--purple)}</style></head><body>
+  <div class="hero p"><a class="back" href="https://ankitthakur104.github.io">← Portfolio</a><div class="badge p">📡 Deep Learning · Time-Series</div>
+  <h1 class="p">Anomaly Detection in Time-Series</h1>
+  <p class="subtitle">Unsupervised real-time IoT anomaly detection using LSTM autoencoders + Isolation Forest ensemble, with n8n automated alerting. Reduced false positives by 35% vs rule-based baselines.</p>
+  <div class="metrics">
+    <div class="metric"><div class="mv p">-35%</div><div class="ml">False Positives</div></div>
+    <div class="metric"><div class="mv p">&lt;200ms</div><div class="ml">Detection Latency</div></div>
+    <div class="metric"><div class="mv p">5</div><div class="ml">Sensor Channels</div></div>
+    <div class="metric"><div class="mv p">LSTM</div><div class="ml">Autoencoder</div></div>
+  </div>
+  <a class="cta p" href="https://github.com/ankitthakur104/anomaly-detection-timeseries">View on GitHub</a>
+  <a class="cta cta-o" href="https://ankitthakur104.github.io#projects">All Projects</a>
+  </div>
+  <main>
+  <div class="sec"><h2><span class="ic p">🏗</span>Architecture</h2>
+  <div class="arch"><span class="nd p">IoT Sensor Stream</span> <span class="ar">→</span> <span class="nd p">FastAPI Ingest</span> <span class="ar">→</span> <span class="nd p">Sliding Window (30 steps)</span>
+  <span class="ar">↓ Inference</span>
+  <span class="nd p">LSTM Autoencoder</span> <span class="ar">→</span> <span class="nd p">Reconstruction Error</span>
+  <span class="ar">+</span>
+  <span class="nd p">Isolation Forest</span> <span class="ar">→</span> <span class="nd p">Anomaly Score</span>
+  <span class="ar">↓ if anomaly detected</span>
+  <span class="nd p">n8n Webhook</span> <span class="ar">→</span> <span class="nd p">Slack / Email Alert</span></div></div>
+  <div class="sec"><h2><span class="ic p">✨</span>Key Features</h2><div class="grid">
+  <div class="card"><h3>LSTM Autoencoder</h3><p>Encoder-decoder LSTM trained on normal sequences — anomalies produce high reconstruction error.</p></div>
+  <div class="card"><h3>Isolation Forest Ensemble</h3><p>Combines reconstruction error with Isolation Forest for robust multi-signal anomaly scoring.</p></div>
+  <div class="card"><h3>Real-time Detection</h3><p>Sliding window inference over 5-channel IoT data with &lt;200ms end-to-end latency.</p></div>
+  <div class="card"><h3>n8n Alert Automation</h3><p>Anomaly events trigger n8n workflows that notify Slack/email with sensor context and confidence.</p></div>
+  <div class="card"><h3>Confidence Scoring</h3><p>Each detection returns a normalized anomaly score (0–1) for downstream severity triage.</p></div>
+  <div class="card"><h3>Unsupervised Training</h3><p>Trained entirely on normal operating data — no labeled anomaly examples required.</p></div>
+  </div></div>
+  <div class="sec"><h2><span class="ic p">💻</span>LSTM Autoencoder</h2>
+  <pre><code><span class="kw">class</span> <span class="cls">LSTMAutoencoder</span>(nn.Module):
+      <span class="kw">def</span> <span class="fn">__init__</span>(self):
+          super().__init__()
+          self.encoder <span class="op">=</span> nn.LSTM(N_FEATURES, HIDDEN_DIM, batch_first<span class="op">=</span><span class="kw">True</span>)
+          self.decoder <span class="op">=</span> nn.LSTM(HIDDEN_DIM, N_FEATURES, batch_first<span class="op">=</span><span class="kw">True</span>)
+
+      <span class="kw">def</span> <span class="fn">forward</span>(self, x):          <span class="cm"># x: [batch, seq_len, features]</span>
+          _, (h, _)  <span class="op">=</span> self.encoder(x)
+          repeated   <span class="op">=</span> h.squeeze(<span class="op">0</span>).unsqueeze(<span class="op">1</span>).repeat(<span class="op">1</span>, x.size(<span class="op">1</span>), <span class="op">1</span>)
+          out, _     <span class="op">=</span> self.decoder(repeated)
+          <span class="kw">return</span> out  <span class="cm"># reconstruction of input sequence</span>
+
+  <span class="cm"># Anomaly score = reconstruction MSE + Isolation Forest score</span>
+  <span class="kw">with</span> torch.no_grad():
+      recon <span class="op">=</span> model(x_window)
+      error <span class="op">=</span> ((recon <span class="op">-</span> x_window) <span class="op">**</span> <span class="op">2</span>).mean().item()
+  iso_score <span class="op">=</span> iso_forest.decision_function([[error]])[<span class="op">0</span>]
+  is_anomaly <span class="op">=</span> iso_forest.predict([[error]])[<span class="op">0</span>] <span class="op">==</span> <span class="op">-1</span></code></pre></div>
+  <div class="sec"><h2><span class="ic p">🛠</span>Tech Stack</h2>
+  <div class="tags"><span class="tag p">Python</span><span class="tag p">PyTorch</span><span class="tag p">LSTM</span><span class="tag p">Scikit-learn</span><span class="tag">n8n</span><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">NumPy</span></div></div>
+  </main><footer><p>Built by <a href="https://ankitthakur104.github.io">Ankit Kumar</a> &mdash; AI/GenAI Engineer &nbsp;·&nbsp; <a href="https://github.com/ankitthakur104">GitHub</a> &nbsp;·&nbsp; <a href="https://ankitthakur104.github.io#projects">All Projects</a></p></footer></body></html>
